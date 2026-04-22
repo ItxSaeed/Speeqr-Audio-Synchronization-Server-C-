@@ -1,0 +1,3 @@
+C:/Users/Khubaib/Desktop/day1/Speeqr/build/CMakeFiles/speeqr_server.dir
+C:/Users/Khubaib/Desktop/day1/Speeqr/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Khubaib/Desktop/day1/Speeqr/build/CMakeFiles/ZERO_CHECK.dir

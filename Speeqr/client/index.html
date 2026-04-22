@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speeqr — Day 1</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0d0f14;
+      color: #e0e2e8;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 24px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #00e5ff;
+      letter-spacing: 4px;
+    }
+
+    .card {
+      background: #161920;
+      border: 1px solid #252830;
+      border-radius: 10px;
+      padding: 28px 36px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: #555;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* The big offset number */
+    #offsetDisplay {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #00e5ff;
+      line-height: 1;
+      transition: color 0.3s;
+    }
+
+    #offsetDisplay.synced {
+      color: #00ff88;
+    }
+
+    #offsetDisplay.error {
+      color: #ff4060;
+    }
+
+    .unit {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 6px;
+      letter-spacing: 2px;
+    }
+
+    /* Status rows */
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e2128;
+      font-size: 0.8rem;
+    }
+
+    .status-row:last-child {
+      border-bottom: none;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #333;
+      margin-right: 8px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+
+    .dot.green {
+      background: #00ff88;
+      box-shadow: 0 0 6px #00ff88;
+    }
+
+    .dot.yellow {
+      background: #ffd700;
+      box-shadow: 0 0 6px #ffd700;
+      animation: blink 1s infinite;
+    }
+
+    .dot.red {
+      background: #ff4060;
+      box-shadow: 0 0 6px #ff4060;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.3
+      }
+    }
+
+    .val {
+      color: #00e5ff;
+    }
+
+    button {
+      background: #00e5ff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      background: #33ebff;
+    }
+
+    button:disabled {
+      background: #252830;
+      color: #555;
+      cursor: not-allowed;
+    }
+
+    #log {
+      background: #0a0c10;
+      border: 1px solid #1e2128;
+      border-radius: 6px;
+      padding: 12px;
+      width: 100%;
+      max-width: 420px;
+      height: 130px;
+      overflow-y: auto;
+      font-size: 0.7rem;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    #log .ok {
+      color: #00ff88;
+    }
+
+    #log .info {
+      color: #888;
+    }
+
+    #log .err {
+      color: #ff4060;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>SPEEQR</h1>
+
+  <div class="card">
+    <div class="label">NTP Clock Offset</div>
+    <div id="offsetDisplay">—</div>
+    <div class="unit">milliseconds</div>
+  </div>
+
+  <div class="card">
+    <div class="status-row">
+      <span><span class="dot" id="wsDot"></span>WebSocket</span>
+      <span class="val" id="wsVal">Disconnected</span>
+    </div>
+    <div class="status-row">
+      <span><span class="dot" id="ntpDot"></span>NTP Sync</span>
+      <span class="val" id="ntpVal">Not synced</span>
+    </div>
+    <div class="status-row">
+      <span><span class="dot" id="syncDot"></span>Sync Count</span>
+      <span class="val" id="syncCount">0</span>
+    </div>
+  </div>
+
+  <button id="connectBtn" onclick="connect()">Connect to Server</button>
+
+  <div id="log"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

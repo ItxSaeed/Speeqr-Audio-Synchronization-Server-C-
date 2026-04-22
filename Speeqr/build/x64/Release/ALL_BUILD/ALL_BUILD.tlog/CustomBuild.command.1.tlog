@@ -1,0 +1,10 @@
+^C:\USERS\KHUBAIB\DESKTOP\DAY1\SPEEQR\CMAKELISTS.TXT
+setlocal
+C:\CMake\bin\cmake.exe -SC:/Users/Khubaib/Desktop/day1/Speeqr -BC:/Users/Khubaib/Desktop/day1/Speeqr/build --check-stamp-file C:/Users/Khubaib/Desktop/day1/Speeqr/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

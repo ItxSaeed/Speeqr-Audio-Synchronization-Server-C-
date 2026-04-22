@@ -1,0 +1,10 @@
+^C:\USERS\KHUBAIB\DESKTOP\DAY1\SPEEQR\BUILD\CMAKEFILES\E6FD08BA74EE558AB8DCE19F7FF269A8\GENERATE.STAMP.RULE
+setlocal
+C:\CMake\bin\cmake.exe -SC:/Users/Khubaib/Desktop/day1/Speeqr -BC:/Users/Khubaib/Desktop/day1/Speeqr/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Khubaib/Desktop/day1/Speeqr/build/speeqr.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
